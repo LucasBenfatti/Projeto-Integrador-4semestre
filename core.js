@@ -61,7 +61,7 @@ function removeItem(cartItemDOM, product, addToCartButtonDOM) {
                 setTimeout(() => cartItemDOM.remove(), 250);
                 cart = cart.filter(cartItem => cartItem.name !== product.name);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                addToCartButtonDOM.innerText = "Add To Cart";
+                addToCartButtonDOM.innerText = "Adicionar ao Carrinho";
                 addToCartButtonDOM.disabled = false;
             } // Endif
         }); // EndForeach

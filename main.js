@@ -21,7 +21,7 @@ if (cart.length > 0) {
             const productDOM = addToCartButtonDOM.parentNode;
 
             if (productDOM.querySelector(".product__name").innerText === product.name) {
-                addToCartButtonDOM.innerText = "In Cart";
+                addToCartButtonDOM.innerText = "No carrinho";
                 addToCartButtonDOM.disabled = true;
 
                 const cartItemsDOM = cartDOM.querySelectorAll(".cart__item");
@@ -58,7 +58,7 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
 
             cart.push(product);
             localStorage.setItem('cart', JSON.stringify(cart));
-            addToCartButtonDOM.innerText = "In Cart";
+            addToCartButtonDOM.innerText = "No Carrinho";
             addToCartButtonDOM.disabled = true;
 
             // Uma vez add primeiro produto é mapeado o dom de todos os produtos do carrinho
