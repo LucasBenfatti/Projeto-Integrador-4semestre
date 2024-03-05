@@ -1,5 +1,5 @@
-##Integrantes do Grupo:
+# Integrantes do Grupo:
 
-Eduardo Dalhke Lopes
-Lucas Benfatti
-Natália Maria Secco Souza
+**Eduardo Dalhke Lopes**  
+**Lucas Benfatti**  
+**Natália Maria Secco Souza**
