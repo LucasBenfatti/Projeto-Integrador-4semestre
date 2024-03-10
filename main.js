@@ -6,8 +6,7 @@ let cart = (JSON.parse(localStorage.getItem('cart')) || []);
 const cartDOM = document.querySelector(".cart");
 // Mapea todos os botoes de add ao carrinho para ações de click
 const addToCartButtonsDOM = document.querySelectorAll('[data-action="ADD_TO_CART"]');
-
-
+const checkoutButton = document.getElementById('checkoutButton');
 
 // Quando carrinho possui produto
 if (cart.length > 0) {
@@ -19,7 +18,6 @@ if (cart.length > 0) {
 
         addToCartButtonsDOM.forEach(addToCartButtonDOM => {
             const productDOM = addToCartButtonDOM.parentNode;
-
             if (productDOM.querySelector(".product__name").innerText === product.name) {
                 addToCartButtonDOM.innerText = "No carrinho";
                 addToCartButtonDOM.disabled = true;
@@ -28,18 +26,15 @@ if (cart.length > 0) {
                 cartItemsDOM.forEach(cartItemDOM => {
                     addCartItemsDOM(cartItemDOM, product, addToCartButtonDOM);
                 }); // EndForeach
-
             } // Endif
-
         }); // EndForeach
-
     }); // EndForeach
-} // Endif
+}
 
 addToCartButtonsDOM.forEach(addToCartButtonDOM => {
     console.log(`Percorrendo todos os botoes de add ao carrinho pelo DOM`)
     addToCartButtonDOM.addEventListener('click', () => {
-        
+
         const productDOM = addToCartButtonDOM.parentNode;
         console.log(`Click de add ao carrinho capturado ${productDOM}`)
         const product = {
@@ -67,7 +62,59 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
                 addCartItemsDOM(cartItemDOM, product, addToCartButtonDOM);
             }); // EndForeach
         } // Endif
-
     }); // EndEvent
-
 }); // EndForeach
+
+function finalizeOrder() {
+    if (cart.length > 0) {
+        const orderNumber = generateOrderNumber();
+        alert(`Pedido finalizado! Número do pedido: ${orderNumber}`);
+
+        // Limpa o carrinho
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Remove os itens do DOM
+        const cartItemsDOM = cartDOM.querySelectorAll(".cart__item");
+        cartItemsDOM.forEach(cartItemDOM => {
+            cartItemDOM.remove();
+        });
+
+        // Habilita os botões "Adicionar ao Carrinho"
+        addToCartButtonsDOM.forEach(addToCartButtonDOM => {
+            addToCartButtonDOM.innerText = "Adicionar ao Carrinho";
+            addToCartButtonDOM.disabled = false;
+        });
+
+
+    } else {
+        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar o pedido.');
+    }
+}
+
+function generateOrderNumber() {
+    // Gere um número de pedido único com base na data e hora atual
+    const date = new Date();
+    const orderNumber = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+    return orderNumber;
+}
+
+function openCheckoutModal() {
+    if (cart.length > 0) {
+        const modal = document.getElementById('checkoutModal');
+        const totalValue = calculateTotalValue();
+        const totalParagraph = modal.querySelector('#total');
+        totalParagraph.innerText = `Total do Pedido: R$ ${totalValue.toFixed(2)}`;
+        modal.style.display = 'block';
+    } else {
+        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar o pedido.');
+    }
+}
+
+// Função para ocultar o modal
+function closeCheckoutModal() {
+    const modal = document.getElementById('checkoutModal');
+    modal.style.display = 'none';
+}
+
+
