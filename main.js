@@ -68,7 +68,8 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
 function finalizeOrder() {
     if (cart.length > 0) {
         const orderNumber = generateOrderNumber();
-        alert(`Pedido finalizado! Número do pedido: ${orderNumber}`);
+        alert(`Pedido finalizado! Número de rastreio do pedido: ${orderNumber} \n\n ATENÇÃO: Com este número, você consegue acompanhar a entrega 
+        em tempo real no site dos correios.`);
 
         // Limpa o carrinho
         cart = [];
