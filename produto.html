@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Conect - Drogaria</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+  <link rel="stylesheet" href="produto.css">
+  <link rel="stylesheet" href="chat.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <main class="main-container">
+
+    <section class="section">
+      <div class="div_logo">
+        <a href="index.html">
+          <img class="imagem_logo margin-right-10" src="img/products/logo-farmacia.png" alt="Logo">
+        </a>
+        <h2 class="text-center font-size-45">Farm Conect - Drogaria Online</h2>
+      </div>
+      
+      <div class="product-detail">
+        <img id="productImage" class="product__image" src="" alt="Produto">
+        <h2 id="productName" class="product__name"></h2>
+        <h3 id="productPrice" class="product__price"></h3>
+        <p id="productDescription" class="product__description"></p>
+        <button id="addToCartButton" class="btn btn--primary">Adicionar ao Carrinho</button>
+      </div>
+    </section>
+
+		<section class="section">
+			<h2 class="text-center">Carrinho</h2>
+			<div class="cart">
+				<p id="total"></p>
+        <button class="btn btn--success btn--large" id="checkoutButton" onclick="finalizeOrder()">Finalizar
+					Pedido</button>
+			</div>
+		</section>
+
+    <div id="chat-container">
+      <div id="chat-header">
+        <h3>Atendimento Online</h3>
+      </div>
+      <div id="chat-box">
+        <div id="chat-messages"></div>
+      </div>
+      <div id="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Escreva sua mensagem...">
+        <button id="send-button" onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+
+  </main>
+  
+  
+  <script src="produtos.js"></script>
+  <script src="chat.js"></script>
+  <script src="core.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
