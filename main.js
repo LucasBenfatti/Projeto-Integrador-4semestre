@@ -66,33 +66,38 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
 }); // EndForeach
 
 function finalizeOrder() {
-    if (cart.length > 0) {
-        const orderNumber = generateOrderNumber();
-        alert(`Pedido finalizado! Número de rastreio do pedido: ${orderNumber} \n\n ATENÇÃO: Com este número, você consegue acompanhar a entrega 
-        em tempo real no site dos correios.`);
+    // Verifica se o usuário está na página do carrinho
+    if (window.location.pathname.endsWith("carrinho.html")) {
+        if (cart.length > 0) {
 
-        // Limpa o carrinho
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
+            // Limpa o carrinho
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
 
-        // Remove os itens do DOM
-        const cartItemsDOM = cartDOM.querySelectorAll(".cart__item");
-        cartItemsDOM.forEach(cartItemDOM => {
-            cartItemDOM.remove();
-        });
+            // Remove os itens do DOM
+            const cartItemsDOM = cartDOM.querySelectorAll(".cart__item");
+            cartItemsDOM.forEach(cartItemDOM => {
+                cartItemDOM.remove();
+            });
 
-        // Habilita os botões "Adicionar ao Carrinho"
-        addToCartButtonsDOM.forEach(addToCartButtonDOM => {
-            addToCartButtonDOM.innerText = "Adicionar ao Carrinho";
-            addToCartButtonDOM.disabled = false;
-        });
+            // Habilita os botões "Adicionar ao Carrinho"
+            addToCartButtonsDOM.forEach(addToCartButtonDOM => {
+                addToCartButtonDOM.innerText = "Adicionar ao Carrinho";
+                addToCartButtonDOM.disabled = false;
+            });
 
-
+            // Redireciona para a tela de confirmação
+            window.location.href = 'confirmacao.html';
+        } else {
+            alert('Seu carrinho está vazio. Adicione produtos antes de finalizar o pedido.');
+        }
     } else {
-        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar o pedido.');
+        // Redireciona para a tela de carrinho se não estiver na página do carrinho
+        window.location.href = 'carrinho.html';
     }
 }
 
+/**
 function generateOrderNumber() {
     // Gere um número de pedido único com base na data e hora atual
     const date = new Date();
@@ -100,22 +105,8 @@ function generateOrderNumber() {
     return orderNumber;
 }
 
-function openCheckoutModal() {
-    if (cart.length > 0) {
-        const modal = document.getElementById('checkoutModal');
-        const totalValue = calculateTotalValue();
-        const totalParagraph = modal.querySelector('#total');
-        totalParagraph.innerText = `Total do Pedido: R$ ${totalValue.toFixed(2)}`;
-        modal.style.display = 'block';
-    } else {
-        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar o pedido.');
-    }
-}
+const orderNumber = generateOrderNumber();
+alert(`Pedido finalizado! Número de rastreio do pedido: ${orderNumber} \n\n ATENÇÃO: Com este número, você consegue acompanhar a entrega 
+em tempo real no site dos correios.`);
 
-// Função para ocultar o modal
-function closeCheckoutModal() {
-    const modal = document.getElementById('checkoutModal');
-    modal.style.display = 'none';
-}
-
-
+*/
